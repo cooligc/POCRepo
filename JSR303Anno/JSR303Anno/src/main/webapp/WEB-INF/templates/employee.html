@@ -1,0 +1,48 @@
+<html>
+<head>
+<link type="text/css" th:href="@{/css/bootstrap-theme.css}" />
+<link type="text/css" th:href="@{/css/bootstrap.css.css}" />
+<link type="text/css" th:href="@{/css/common.css}" />
+</head>
+<body>
+
+	<div class="container">
+		<h2 th:text="#{employee.title}">Vertical (basic) form</h2>
+		<form role="form" th:object="${employee}" th:action="@{/submit}" method="POST" name="employee">
+			<div class="form-group">
+				<label th:text="#{enter.first.name}">Enter First Name</label> <input type="text"
+					class="form-control" id="fname" th:field="*{firstName}"  th:attr="placeholder=#{enter.first.name}"/>
+					<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="errorblock">Incorrect date</p>
+			</div>
+			<div class="form-group">
+				<label th:text="#{enter.last.name}">Enter Last Name</label> <input type="text"
+					class="form-control" id="lname" th:field="*{lastName}" th:attr="placeholder=#{enter.last.name}"/>
+					<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="errorblock">Incorrect date</p>
+			</div>
+			<div class="form-group">
+				<label th:text="#{enter.company.name}">Enter Company Name</label> <input type="text"
+					class="form-control" id="cname" th:field="*{companyName}" th:attr="placeholder=#{enter.company.name}"/>
+					<p th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" class="errorblock">Incorrect date</p>
+			</div>
+			<div class="form-group">
+				<label th:text="#{enter.employee.id}">Enter Employee ID</label> <input type="text"
+					class="form-control" id="eid" th:field="*{empId}" th:attr="placeholder=#{enter.employee.id}"/>
+					<p th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}" class="errorblock">Incorrect date</p>
+			</div>
+			<div class="form-group">
+				<label th:text="#{enter.employee.designation}">Enter your Designation</label> <input type="text"
+					class="form-control" id="edesg" th:field="*{designation}" th:attr="placeholder=#{enter.employee.designation}"/>
+					<p th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}" class="errorblock">Incorrect date</p>
+			</div>
+			
+			<button type="submit" class="btn btn-default" th:text="#{submit.employee.details}">Submit</button>
+		</form>
+	</div>
+
+
+	<footer>
+		<script type="text/javascript" th:src="@{/js/jQuery.js}" />
+		<script type="text/javascript" th:src="@{/js/common.js}" />
+	</footer>
+</body>
+</html>
