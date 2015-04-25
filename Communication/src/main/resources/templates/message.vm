@@ -1,0 +1,6 @@
+
+Dear <h1 style="coolor:red;border:1px solid green;height:20px;width:300px">${firstName} ${lastName}</h1>
+ 
+Sending Email Using Spring Smtp Email + Velocity Template from ${location} location.
+
+Thanks
