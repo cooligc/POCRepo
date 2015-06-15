@@ -37,8 +37,8 @@ public class VelocityMail {
 	public void sendMail(String dear,String message2){
 		SimpleMailMessage message = new SimpleMailMessage();
 		  
-		  message.setFrom("sitakant.chaudhury@gmail.com");
-		  message.setTo("chaudhury.sitakant@gmail.com");
+		  message.setFrom("from_username@gmail.com");
+		  message.setTo("to_username@gmail.com");
 		  message.setSubject("Test");
 
 		  Template template = velocityEngine.getTemplate("./templates/" + "message.vm");
@@ -64,8 +64,8 @@ public class VelocityMail {
 			
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				 MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-					  message.setFrom("sitakant.chaudhury@gmail.com");
-					  message.setTo("chaudhury.sitakant@gmail.com");
+					  message.setFrom("from_username@gmail.com");
+					  message.setTo("to_username@gmail.com");
 					  message.setSubject("Test");
 					  Template template = velocityEngine.getTemplate("./templates/" + "message.vm");
 

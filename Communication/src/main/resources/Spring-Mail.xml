@@ -6,8 +6,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="sitakant.chaudhury@gmail.com" />
-		<property name="password" value="sitakant129" />
+		<property name="username" value="your_username@gmail.com" />
+		<property name="password" value="your_password" />
 		
 		<property name="javaMailProperties">
 			<props>
@@ -26,8 +26,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="customeMailMessage"
 		class="org.springframework.mail.SimpleMailMessage">
 
-		<property name="from" value="sitakant.chaudhury@gmail.com" />
-		<property name="to" value="chaudhury.sitakant@gmail.com" />
+		<property name="from" value="sender_username@gmail.com" />
+		<property name="to" value="reciever_username@gmail.com" />
 		<property name="subject" value="Testing Subject" />
 		<property name="text">
 		<value>

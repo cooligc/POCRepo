@@ -13,8 +13,8 @@ import javax.mail.internet.MimeMessage;
 public class SendMailTLS {
 	public static void main(String[] args) {
 
-		final String username = "sitakant.chaudhury@gmail.com";
-		final String password = "sitakant129";
+		final String username = "your_username@gmail.com";
+		final String password = "your_password";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
