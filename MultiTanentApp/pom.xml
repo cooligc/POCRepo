@@ -9,7 +9,7 @@
 	<description>MultiTanent App</description>
 
 	<dependencies>
-		<dependency>
+		<dependency> 
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.2.0.Final</version>
