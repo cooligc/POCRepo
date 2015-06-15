@@ -1,0 +1,84 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
+ 
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="com.skc"></context:component-scan>
+	
+	
+	<bean id="entityManagerFactory"
+		class="com.skc.mt.AppLocalContainerEntityFactory">
+		<property name="persistenceXmlLocation" value="persistance.xml" />
+		<property name="persistenceUnitName" value="myUnit" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<map>
+                <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+                <entry key="hibernate.show_sql" value="true"/>
+                <entry key="hibernate.multiTenancy" value="DATABASE"/>
+                <entry key="hibernate.tenant_identifier_resolver" value-ref="webSessionTenantIdentifierResolver"/>
+                <entry key="hibernate.multi_tenant_connection_provider" value-ref="simpleTenantConnectionProvider"/>
+            </map>
+		</property>
+	</bean>
+	
+	<!-- Data Sources -->
+	<!-- using JEE namespace for lookup -->
+     <!-- 
+     <jee:jndi-lookup id="dbDataSource" jndi-name="jdbc/MyLocalDB"
+            expected-type="javax.sql.DataSource" />
+      -->
+	
+	<bean id="dataSource1" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/tanent1"/>
+    </bean>
+    
+    <bean id="dataSource2" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/tanent2"/>
+    </bean>
+      
+    <!-- Create Data Source Map -->
+    <bean id="datasources" class="org.springframework.beans.factory.config.MapFactoryBean">
+				<property name="targetMapClass">
+					<value>java.util.HashMap</value>
+				</property>
+				<property name="sourceMap">
+					<map>
+						<entry key="tenant1" value-ref="dataSource1"/>
+        				<entry key="tenant2" value-ref="dataSource2"/>
+					</map>
+				</property>
+			</bean>
+    
+	<bean id="webSessionTenantIdentifierResolver" class="com.skc.mt.WebSessionCurrentSessionResolver" scope="request">
+		<aop:scoped-proxy/>
+	</bean>
+	
+	 <bean id="simpleTenantConnectionProvider" class="com.skc.mt.SimpleMultiTenantConnectionProvider">
+        <property name="dataSourceMap" ref="datasources"/>
+    </bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<bean id="viewResolver"
+      	   class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+           <property name="prefix">
+              <value>/WEB-INF/pages/</value>
+           </property>
+           <property name="suffix">
+              <value>.jsp</value>
+           </property>
+        </bean>
+ 
+</beans>

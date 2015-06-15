@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name="jdbc/tanent1" auth="Container" type="javax.sql.DataSource"
+		username="root" password="root" driverclassname="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/tanent1" maxactive="10" maxidle="4">
+
+	</Resource>
+
+	<Resource name="jdbc/tanent2" auth="Container" type="javax.sql.DataSource"
+		username="root" password="root" driverclassname="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/tanent2" maxactive="10" maxidle="4">
+
+	</Resource>
+</Context>
