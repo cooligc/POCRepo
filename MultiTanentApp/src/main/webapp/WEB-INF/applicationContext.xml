@@ -15,7 +15,7 @@
 	
 	<bean id="entityManagerFactory"
 		class="com.skc.mt.AppLocalContainerEntityFactory">
-		<property name="persistenceXmlLocation" value="persistance.xml" />
+		<property name="persistenceXmlLocation" value="META-INF/persistance.xml" />
 		<property name="persistenceUnitName" value="myUnit" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
@@ -31,21 +31,6 @@
 		</property>
 	</bean>
 	
-	<!-- Data Sources -->
-	<!-- using JEE namespace for lookup -->
-     <!-- 
-     <jee:jndi-lookup id="dbDataSource" jndi-name="jdbc/MyLocalDB"
-            expected-type="javax.sql.DataSource" />
-      -->
-	
-	<bean id="dataSource1" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="java:comp/env/jdbc/tanent1"/>
-    </bean>
-    
-    <bean id="dataSource2" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="java:comp/env/jdbc/tanent2"/>
-    </bean>
-      
     <!-- Create Data Source Map -->
     <bean id="datasources" class="org.springframework.beans.factory.config.MapFactoryBean">
 				<property name="targetMapClass">
@@ -70,15 +55,5 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	
-	<bean id="viewResolver"
-      	   class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
-           <property name="prefix">
-              <value>/WEB-INF/pages/</value>
-           </property>
-           <property name="suffix">
-              <value>.jsp</value>
-           </property>
-        </bean>
- 
+
 </beans>
