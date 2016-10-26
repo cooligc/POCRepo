@@ -1,6 +1,6 @@
 package com.skc.rest.hateos.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +23,11 @@ public class EmployeeController {
 		List<Employee> employees = new ArrayList<>();
 
 		Employee e = new Employee(new Long(25), "skc");
-		Employee e2 = new Employee(new Long(25), "skc");
+		Employee e2 = new Employee(new Long(65), "skc");
 
 		// static imports
-		e.add(linkTo(EmployeeController.class).withSelfRel());
-		e2.add(linkTo(EmployeeController.class).withSelfRel());
+		e.add(linkTo(methodOn(EmployeeController.class).getEmployeeOnId(e.getEmp_id())).withSelfRel());
+		e2.add(linkTo(methodOn(EmployeeController.class).getEmployeeOnId(e2.getEmp_id())).withSelfRel());
 
 		employees.add(e);
 		employees.add(e2);
@@ -40,9 +40,11 @@ public class EmployeeController {
 
 		Employee e = new Employee(new Long(id), "skc");
 		// static imports
-		e.add(linkTo(EmployeeController.class).withSelfRel());
+		e.add(linkTo(methodOn(EmployeeController.class).getEmployeeOnId(id)).withSelfRel());
+		e.add(linkTo(methodOn(EmployeeController.class).getEmployeeOnId(e.getEmp_id())).withRel("parent"));
 
 		return new ResponseEntity<Employee>(e, HttpStatus.OK);
 	}
+	
 
 }
