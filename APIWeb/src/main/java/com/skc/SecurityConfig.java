@@ -21,6 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 												  .antMatchers(HttpMethod.GET,"/employee**").hasRole("USER")
 												  .antMatchers(HttpMethod.PUT,"/employee/**").hasRole("USER")
 												  .antMatchers(HttpMethod.DELETE,"/employee/**").hasRole("USER")
+												  .antMatchers("/webjars/**").anonymous()
+												  .antMatchers("*.html").anonymous()
 												  .and().csrf().disable();
 	}
 
