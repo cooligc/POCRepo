@@ -3,6 +3,7 @@ package com.skc.poc.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +35,10 @@ public class EmployeeController {
 	@RequestMapping(method=RequestMethod.GET,produces={"application/json"})
 	public List<Employee> getEmployees(){
 		return employeeRepository.getEmployees();
+	}
+	
+	@RequestMapping(value="/employeeId",method=RequestMethod.GET,produces={"application/json"})
+	public Employee getEmployee(@PathVariable("employeeId") Integer empId){
+		return employeeRepository.getEmployeeById(empId);
 	}
 }
