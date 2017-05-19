@@ -1,0 +1,23 @@
+<employees>
+    <employee>
+        <id></id>
+        <name></name>
+        <dept id="10">
+            <name>IT10</name>
+        </dept>
+    </employee>
+      <employee>
+        <id></id>
+        <name></name>
+        <dept id="10">
+            <name>IT10</name>
+        </dept>
+    </employee>
+      <employee>
+        <id></id>
+        <name></name>
+        <dept id="10">
+            <name>IT10</name>
+        </dept>
+    </employee>
+</employees>
