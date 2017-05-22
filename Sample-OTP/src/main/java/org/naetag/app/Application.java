@@ -14,7 +14,7 @@ public class Application implements CommandLineRunner{
 	}
 
 	public void run(String... args) throws Exception {
-		String secret = "NaeTag";//Base32.random();
+		String secret = "Test";//Base32.random();
 		Totp totp = new Totp(secret);
 		String otp = totp.now();
 		System.out.println(totp.now()); //868748
