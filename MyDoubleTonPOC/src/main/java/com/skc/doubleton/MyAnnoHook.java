@@ -4,8 +4,11 @@
 package com.skc.doubleton;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
+
+import javax.annotation.Resource;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
@@ -57,14 +60,15 @@ public class MyAnnoHook implements InitializingBean,ApplicationContextAware {
 			field.setAccessible(false);
 		});
 		
-		
-		Set<Field> autowiredAnnotations = reflections.getFieldsAnnotatedWith(Autowired.class);
-		autowiredAnnotations.forEach(field -> {
-			Class clazz = field.getType();
-			Object obj = factory.getInstance(clazz);
-			if(obj != null) {
-				throw new RuntimeException("@Instance Type annotation is not compitable with @Autowired . Use @InjectMe for dynamic injection.");
-			}
+		Arrays.asList(Autowired.class,Resource.class).forEach(clazz1 -> {
+			Set<Field> autowiredAnnotations = reflections.getFieldsAnnotatedWith(clazz1);
+			autowiredAnnotations.forEach(field -> {
+				Class clazz = field.getType();
+				Object obj = factory.getInstance(clazz);
+				if(obj != null) {
+					throw new RuntimeException("@Instance Type annotation is not compitable with @Autowired/@Resource . Use @InjectMe for dynamic injection.");
+				}
+			});
 		});
 		
 		
